@@ -1,0 +1,306 @@
+
+#bodyData
+{
+}
+html {
+}
+
+body {
+    z-index: 5;
+    overflow: hidden;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background: url('../img/library.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-transform: uppercase;
+    font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+hr {
+    max-width: 400px;
+    border-color: #999999;
+}
+
+
+
+#bodyData 
+{
+     background: rgba(0, 0, 0, 0.6);
+    height: 45vh;
+}
+
+#navigationData
+{
+    height: 20vh;
+}
+
+#navigationData .col-md-4
+{
+    cursor: hand;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.8); 
+}
+
+
+
+
+#spaceData
+{
+    height: 25vh;
+}
+
+#footerData
+{
+    background: rgba(0, 0, 0, 0.8);
+    height: 10vh;
+}
+
+.name
+{
+}
+
+.name .col-sm-8
+{
+    margin-top: 5vh;
+}
+
+
+.name h1
+{
+    font-size: 60px;
+     color: white;
+}
+
+.address .col-sm-6
+{
+    margin-top: 5vh;
+}
+
+.address h3
+{
+    font-size: 20px;
+    color: white;
+}
+
+.row
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+.col-md-12
+{
+    padding: 0px;
+}
+
+#navigationData .col-md-4 
+{
+    background: black;
+    height: 20vh;
+    text-transform: uppercase;
+}
+
+#innerText a 
+{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select:none;
+    user-select: none;
+    
+    color: white;
+    margin-top: 8vh;
+    font-size: 3vh;
+    letter-spacing: 0.15em;
+    display: inline-block;
+}
+
+#navigationData .col-md-4 a
+{ 
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#navigationData .col-md-4 a:hover
+{
+    text-decoration: none;
+}
+
+#navigationData .col-md-4 i 
+{
+     font-size: 9vh;
+}
+
+#footerData
+{
+    visibility: hidden;
+    height: 0vh;
+}
+
+#footerData .col-md-12 p
+{
+    font-size: 2vh;
+    letter-spacing: 0.15em;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-top: 4vh;
+    display: inline-block;
+    color: white;
+}
+
+@media screen and (min-width:  768px)
+{
+     #footerData
+     {
+         visibility: visible;
+        height: 10vh;
+        text-transform: uppercase;
+        font-size: 18px;
+        background: black;
+        color: white;
+     }
+
+     i 
+    {
+        margin-top: 3vh;
+    }
+}
+
+@media screen and (min-width: 992px)
+{
+     #spaceData 
+        {
+            z-index: 6;
+            overflow: hidden;
+            font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+            background: url('../img/accountingStuff.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+        }
+}
+
+@media screen and (max-width: 993px)
+{
+    #navigationData .col-md-12
+       {
+           z-index: 6;
+           font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+            background: url('../img/accountingStuff.jpg') no-repeat center center fixed;
+           -webkit-background-size: cover;
+           -moz-background-size: cover;
+           background-size: cover;
+           -o-background-size: cover;
+       }
+
+    #bodyData .col-sm-8
+    {
+        margin-top: 0vh;
+        height: 25vh;
+    }
+
+    #bodyData
+    {
+        top: 0vh;
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    .name .col-sm-8, .col-sm-6
+    {
+        background: transparent !important;
+    }
+
+    .name .col-sm-8
+    {
+        top: 5vh;
+    }
+
+    #navigationData .col-md-4 
+    {
+    background: rgba(0, 0, 0, 0.8);
+        height: 19vh; 
+    }
+    
+    #navigationData .col-md-4 a, i
+    {
+       margin-top: 2.25vh; 
+    }
+    .name h1
+    {
+        font-size: 40px;
+    }
+
+}
+
+.topDivider 
+{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.botDivider a
+{
+    margin-top: 0px !important;
+    padding-top: 0px;
+}
+
+.lightOnHover 
+{
+     -o-transition: .5s;
+     -ms-transition: .5s;
+     -moz-transition: .5s;
+     -webkit-transition: .5s;
+     transition: .5s;
+}
+
+.lightOnHover i
+{
+    color: rgba(128, 128, 128, 0.5);
+     -o-transition: .8s;
+     -ms-transition: .8s;
+     -moz-transition: .8s;
+     -webkit-transition: .8s;
+     transition: .8s;
+}
+
+.lightOnHover
+{
+}
+.lightOnHover:hover
+{
+    background: rgba(0, 0, 0 ,0.95) !important;
+}
+
+.lightOnHover:hover i
+{
+    text-shadow: -1px 1px 1px #ffc, 1px -1px 1px #fff;
+     color: white !important;
+}
+
+.activeData i 
+{
+    font-size: 10vh !important;
+    color: white;
+}
+
+.activeData a
+{
+     
+}
+
+.activeDataNonHover i
+{
+    color: #333;
+}

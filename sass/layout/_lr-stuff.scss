@@ -1,0 +1,23 @@
+.left-picture
+{
+    @include row-background("../img/asset-desk.jpg");
+}
+
+.about-page-cta
+{
+}
+
+.about-cta-background
+{
+    @include row-background("../img/asset-accounting.jpg");
+}
+
+.contact-content
+{
+    @include row-background("../img/asset-blocks.jpg");
+}
+
+.form-cluster-md-8
+{
+
+}
