@@ -80,6 +80,40 @@ $('#email-form').focusout(function(){
     }
 });
 
+$('#email-form').focusin(function(){
+    if (!phoneGood && $('#phone-form').val() != '')
+    {
+        $('#phone-form').addClass("bg-danger");
+    }
+    if (!nameGood && $('#name-form').val() != '')
+    {
+        $('#name-form').addClass("bg-danger");
+    }
+});
+
+$('#phone-form').focusin(function(){
+    if (!emailGood && $('#email-form').val() != '')
+    {
+        $('#email-form').addClass("bg-danger");
+    }
+    if (!nameGood && $('#name-form').val() != '')
+    {
+        $('#name-form').addClass("bg-danger");
+    }
+});
+
+$('#name-form').focusin(function(){
+    if (!emailGood && $('#email-form').val() != '')
+    {
+        $('#email-form').addClass("bg-danger");
+    }
+    if (!phoneGood && $('#phone-form').val() != '')
+    {
+        $('#phone-form').addClass("bg-danger");
+    }
+});
+
+
 $('#phone-form').focusout(function(){
     if (phoneGood)
     {

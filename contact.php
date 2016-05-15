@@ -5,20 +5,20 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Contact</title>
-        <link rel="stylesheet" href="css/app.css" type="text/css">	
+        <link rel="stylesheet" href="css/app.css" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet" type="text/css">
         <link href="css/ys.css" rel="stylesheet">
     </head>
 <body >
-   <div class="bg-pages">                                                                       
-     <div class="navbar-general">                                                             
-       <div class="container">                                                              
-         <a href="index.html" class="btn-navbar btn-navbar-brand tp-md-up-2 tp-sm-in-2 tp-xs-in-1">Home</a>                                                                                   
-         <a href="#" class="btn-navbar btn-navbar-other tp-md-up-2 tp-sm-in-2 tp-xs-in-1 active">Contact</a>                                                                              
-         <a href="about.html" class="btn-navbar btn-navbar-other tp-md-up-2 tp-sm-in-2 tp-xs-in-1">About</a>                                                                                  
-       </div>                                                                               
-     </div>                                                                                   
-</div>  
+   <div class="bg-pages">
+     <div class="navbar-general">
+       <div class="container">
+         <a href="index.html" class="btn-navbar btn-navbar-brand tp-md-up-2 tp-sm-in-2 tp-xs-in-1">Home</a>
+         <a href="#" class="btn-navbar btn-navbar-other tp-md-up-2 tp-sm-in-2 tp-xs-in-1 active">Contact</a>
+         <a href="about.html" class="btn-navbar btn-navbar-other tp-md-up-2 tp-sm-in-2 tp-xs-in-1">About</a>
+       </div>
+     </div>
+</div>
     <div class="container-fluid contact-content row-xs-13-over contact-page-cta login-cluster form-cluster-md-8">
 	<div class="row">
         <div class = "top-xs-1-over">

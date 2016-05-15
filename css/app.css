@@ -5165,4 +5165,6 @@ a.bg-danger:focus, a.bg-danger:hover {
   -ms-background-size: cover;
   background-size: cover; }
 
-/*# sourceMappingURL=app.css.map */
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
