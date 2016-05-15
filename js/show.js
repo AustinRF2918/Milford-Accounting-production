@@ -6,7 +6,6 @@ $('#submission').click(false);
 $(".modal-dialog-show").fadeIn('slow');
 
 $('.close, .close-it').click(function(){
-    console.log("hi");
     $('.modal-dialog-show, .modal-dialog, .modal-dialog-bad').fadeOut();
 });
 
@@ -24,16 +23,19 @@ $('#submission').click(function()
 	if (!nameGood)
 	{
 	    $('#problems').append('<li>Invalid name</li>');
+	    $('#name-form').val('');
 	}
 
 	if (!emailGood)
 	{
 	    $('#problems').append('<li>Invalid email</li>');
+	    $('#email-form').val('');
 	}
 
 	if (!phoneGood)
 	{
 	    $('#problems').append('<li>Invalid phone</li>');
+	    $('#phone-form').val('');
 	}
 	$(".modal-dialog-bad").fadeIn('slow');
     }
