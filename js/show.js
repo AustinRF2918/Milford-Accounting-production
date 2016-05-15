@@ -3,9 +3,11 @@ var emailGood = false;
 var phoneGood = false;
 
 $('#submission').click(false);
+$(".modal-dialog-show").fadeIn('slow');
 
 $('.close, .close-it').click(function(){
-    $('.modal-dialog').fadeOut('slow');
+    console.log("hi");
+    $('.modal-dialog-show, .modal-dialog, .modal-dialog-bad').fadeOut();
 });
 
 $('#submission').click(function()
@@ -15,7 +17,7 @@ $('#submission').click(function()
     if (nameGood && emailGood && phoneGood)
     {
 	document.forms["sentMessage"].submit();
-
+	window.location.href = 'contact-good.html';
     }
     else
     {
