@@ -16,8 +16,8 @@ $('#submission').click(function()
     //Use php at this point to send form data.
     if (nameGood && emailGood && phoneGood)
     {
-	document.forms["sentMessage"].submit();
-	window.location.href = 'contact-good.html';
+        document.forms["sentMessage"].submit();
+        window.location.href = 'contact-good.html';
     }
     else
     {
@@ -42,12 +42,15 @@ $('#submission').click(function()
 $('#name-form').on('input', function(){
     var input = $(this);
     var enteredData = input.val();
-	if (enteredData.length < 5)
+
+	if (enteredData.length < 5 && enteredData != '')
 	{
+        $('#name-form').addClass("bg-danger");
 	    nameGood = false;
 	}
 	else
 	{
+        $('#name-form').removeClass("bg-danger");
 	    nameGood = true;
 	}
 });
@@ -58,15 +61,39 @@ $('#email-form').on('input', function(){
     var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     var out=emailRegex.test(input.val());
 
-    if (out == false)
+    if (out == false && enteredData != '')
     {
-	emailGood = false;
+        $('#email-form').addClass("bg-danger");
+        emailGood = false;
     }
     else
     {
-	emailGood = true;
+        $('#email-form').removeClass("bg-danger");
+        emailGood = true;
     }
 });
+
+$('#email-form').focusout(function(){
+    if (emailGood)
+    {
+        $('#email-form').removeClass("bg-danger");
+    }
+});
+
+$('#phone-form').focusout(function(){
+    if (phoneGood)
+    {
+        $('#phone-form').removeClass("bg-danger");
+    }
+});
+
+$('#name-form').focusout(function(){
+    if (nameGood)
+    {
+        $('#name-form').removeClass("bg-danger");
+    }
+});
+
 
 $('#phone-form').on('input', function(){
     var input = $(this);
@@ -75,12 +102,14 @@ $('#phone-form').on('input', function(){
 
     var out=phoneRegex.test(input.val());
 
-    if (out == false)
+    if (out == false && enteredData != '')
     {
-	phoneGood = false;
+        $('#phone-form').addClass("bg-danger");
+        phoneGood = false;
     }
     else
     {
-	phoneGood = true;
+        $('#phone-form').removeClass("bg-danger");
+        phoneGood = true;
     }
 });

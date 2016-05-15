@@ -9,6 +9,19 @@
     margin-right: auto;
 }
 
+.modal-dialog-show
+{
+    display: none;
+    top: 30%;
+    width: 30%;
+    position: absolute;
+    z-index: 100;
+    left: 0;
+    right:0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .tp-xs-up-1 {
   font-size: 12px; }
 @media (min-width: 544px) {
