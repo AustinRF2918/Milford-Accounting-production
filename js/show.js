@@ -1,47 +1,58 @@
-var AuthenticationForm = function(passwordForm, emailForm, nameForm, modalName, problemList){
+var AuthenticationForm = function(phoneForm, emailForm, nameForm, modalName, problemList){
     this.nameGood = false;
     this.emailGood = false;
     this.phoneGood = false;
 
-    this.passwordForm = $(passwordForm);
-    this.emaiForm = $(emailForm);
-    this.nameForm = $(nameForm);
+    this.phoneForm = phoneForm;
+    this.emailForm = emailForm;
+    this.nameForm = nameForm;
 
-    this.modalName = $(modalName);
-    this.problemList = $(problemList);
+    this.modalName = modalName;
+    this.problemList = problemList;
 };
 
 //Here we will call this on the sentMessage ID for the form we are using.
-AuthenticationForm.prototype.hookSubmission = function(sentMessage)
-    $('#submission').click(function(){
-	if (this.nameGood && this.emailGood && this.phoneGood)
+AuthenticationForm.prototype.hookSubmission = function(submissionForm, responseLink, submissionButton, badForm, badFormClose)
+{
+    var thisObject = this;
+
+    badFormClose.click(function(){
+        badForm.fadeOut('slow', function()
+        {
+            thisObject.problemList.empty();
+        });
+    })
+
+    submissionButton.click(function(){
+
+	if (thisObject.nameGood && thisObject.emailGood && thisObject.phoneGood)
 	{
-	    document.forms[sentMessage].submit();
-	    window.location.href = 'contact-good.html';
+	    document.forms[submissionForm].submit();
+	    window.location.href = contactLink;
 	}
 	else
 	{
 	    //Append list with errors.
-	    if (!nameGood)
+	    if (!thisObject.nameGood)
 	    {
-		this.problemList.append('<li>Invalid name</li>');
-		this.nameForm.val('');
+		thisObject.problemList.append('<li>Invalid name</li>');
+		thisObject.nameForm.val('');
 	    }
 
-	    if (!emailGood)
+	    if (!thisObject.emailGood)
 	    {
-		this.problemList.append('<li>Invalid email</li>');
-		this.emailForm.val('');
+		thisObject.problemList.append('<li>Invalid email</li>');
+		thisObject.emailForm.val('');
 	    }
 
-	    if (!phoneGood)
+	    if (!thisObject.phoneGood)
 	    {
-		this.problemList.append('<li>Invalid phone</li>');
-		this.phoneForm.val('');
+		thisObject.problemList.append('<li>Invalid phone</li>');
+		thisObject.phoneForm.val('');
 	    }
 
 	    //Fade in bad modal dialgoue
-	    $(".modal-dialog-bad").fadeIn('slow');
+	    badForm.fadeIn('slow');
 	}
     });
 
@@ -55,21 +66,22 @@ AuthenticationForm.prototype.displayModalSuccess = function($modalName, $closeBu
     });
 };
 
-AuthenitcationForm.prototype.hookInputHandlers = function()
+AuthenticationForm.prototype.hookInputHandlers = function(colorClass)
 {
+    var thisObject = this;
+
     this.nameForm.on('input', function(){
 	var input = $(this);
 	var enteredData = input.val();
-
 	    if (enteredData.length < 5 && enteredData != '')
 	    {
-		this.nameForm.addClass("bg-danger");
-		this.nameGood = false;
+		thisObject.nameForm.addClass(colorClass);
+		thisObject.nameGood = false;
 	    }
 	    else
 	    {
-		this.nameForm.removeClass("bg-danger");
-		this.nameGood = true;
+		thisObject.nameForm.removeClass(colorClass);
+		thisObject.nameGood = true;
 	    }
     });
 
@@ -81,13 +93,13 @@ AuthenitcationForm.prototype.hookInputHandlers = function()
 
 	if (out == false && enteredData != '')
 	{
-	    this.emailForm.addClass("bg-danger");
-	    this.emailGood = false;
+	    thisObject.emailForm.addClass(colorClass);
+	    thisObject.emailGood = false;
 	}
 	else
 	{
-	    this.emailForm.removeClass("bg-danger");
-	    this.emailGood = true;
+	    thisObject.emailForm.removeClass(colorClass);
+	    thisObject.emailGood = true;
 	}
     });
 
@@ -100,70 +112,73 @@ AuthenitcationForm.prototype.hookInputHandlers = function()
 
 	if (out == false && enteredData != '')
 	{
-	    this.phoneForm.addClass("bg-danger");
-	    this.phoneGood = false;
+	    thisObject.phoneForm.addClass(colorClass);
+	    thisObject.phoneGood = false;
 	}
 	else
 	{
-	    this.phoneForm.removeClass("bg-danger");
-	    this.phoneGood = true;
+	    thisObject.phoneForm.removeClass(colorClass);
+	    thisObject.phoneGood = true;
 	}
     });
 };
 
-AuthenitcationForm.prototype.hookInputHandlers = function(){
+AuthenticationForm.prototype.hookChangeHandlers = function(colorClass){
+    var thisObject = this;
+
     this.emailForm.focusout(function(){
-	if (this.emailGood)
+	if (thisObject.emailGood)
 	{
-	    this.emailForm.removeClass("bg-danger");
+	    thisObject.emailForm.removeClass(colorClass);
 	}
     });
 
     this.emailForm.focusin(function(){
-	if (!this.phoneGood && $('#phone-form').val() != '')
+	if (!thisObject.phoneGood && $('#phone-form').val() != '')
 	{
-	    this.phoneForm.addClass("bg-danger");
+	    thisObject.phoneForm.addClass(colorClass);
 	}
 	if (!this.nameGood && $('#name-form').val() != '')
 	{
-	    this.emailForm.addClass("bg-danger");
+	    thisObject.emailForm.addClass(colorClass);
 	}
     });
 
     this.phoneForm.focusin(function(){
-	if (!this.emailGood && $('#email-form').val() != '')
+	if (!thisObject.emailGood && $('#email-form').val() != '')
 	{
-	    this.emailForm.addClass("bg-danger");
+	    thisObject.emailForm.addClass(colorClass);
 	}
-	if (!this.nameGood && $('#name-form').val() != '')
+	if (!thisObject.nameGood && $('#name-form').val() != '')
 	{
-	    this.nameForm.addClass("bg-danger");
+	    thisObject.nameForm.addClass(colorClass);
 	}
     });
 
     this.nameForm.focusin(function(){
-	if (!this.emailGood && $('#email-form').val() != '')
+	if (!thisObject.emailGood && $('#email-form').val() != '')
 	{
-	    this.emailForm.addClass("bg-danger");
+	    thisObject.emailForm.addClass(colorClass);
 	}
-	if (!this.phoneGood && $('#phone-form').val() != '')
+	if (!thisObject.phoneGood && $('#phone-form').val() != '')
 	{
-	    this.phoneForm..addClass("bg-danger");
+	    thisObject.phoneForm.addClass(colorClass);
 	}
     });
 
 
     this.phoneForm.focusout(function(){
-	if (this.phoneGood)
+	if (thisObject.phoneGood)
 	{
-	    this.phoneForm.removeClass("bg-danger");
+	    thisObject.phoneForm.removeClass(colorClass);
 	}
     });
 
     this.nameForm.focusout(function(){
-	if (this.nameGood)
+	if (thisObject.nameGood)
 	{
-	    this.nameForm.removeClass("bg-danger");
+	    thisObject.nameForm.removeClass(colorClass);
 	}
     });
 };
+}
