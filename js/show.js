@@ -1,151 +1,169 @@
-var nameGood = false;
-var emailGood = false;
-var phoneGood = false;
+var AuthenticationForm = function(passwordForm, emailForm, nameForm, modalName, problemList){
+    this.nameGood = false;
+    this.emailGood = false;
+    this.phoneGood = false;
 
-$('#submission').click(false);
-$(".modal-dialog-show").fadeIn('slow');
+    this.passwordForm = $(passwordForm);
+    this.emaiForm = $(emailForm);
+    this.nameForm = $(nameForm);
 
-$('.close, .close-it').click(function(){
-    $('.modal-dialog-show, .modal-dialog, .modal-dialog-bad').fadeOut();
-});
+    this.modalName = $(modalName);
+    this.problemList = $(problemList);
+};
 
-$('#submission').click(function()
-{
-    $('#problems').empty();
-    //Use php at this point to send form data.
-    if (nameGood && emailGood && phoneGood)
-    {
-        document.forms["sentMessage"].submit();
-        window.location.href = 'contact-good.html';
-    }
-    else
-    {
-	if (!nameGood)
+//Here we will call this on the sentMessage ID for the form we are using.
+AuthenticationForm.prototype.hookSubmission = function(sentMessage)
+    $('#submission').click(function(){
+	if (this.nameGood && this.emailGood && this.phoneGood)
 	{
-	    $('#problems').append('<li>Invalid name</li>');
-	    $('#name-form').val('');
-	}
-
-	if (!emailGood)
-	{
-	    $('#problems').append('<li>Invalid email</li>');
-	    $('#email-form').val('');
-	}
-
-	if (!phoneGood)
-	{
-	    $('#problems').append('<li>Invalid phone</li>');
-	    $('#phone-form').val('');
-	}
-	$(".modal-dialog-bad").fadeIn('slow');
-    }
-})
-
-$('#name-form').on('input', function(){
-    var input = $(this);
-    var enteredData = input.val();
-
-	if (enteredData.length < 5 && enteredData != '')
-	{
-        $('#name-form').addClass("bg-danger");
-	    nameGood = false;
+	    document.forms[sentMessage].submit();
+	    window.location.href = 'contact-good.html';
 	}
 	else
 	{
-        $('#name-form').removeClass("bg-danger");
-	    nameGood = true;
+	    //Append list with errors.
+	    if (!nameGood)
+	    {
+		this.problemList.append('<li>Invalid name</li>');
+		this.nameForm.val('');
+	    }
+
+	    if (!emailGood)
+	    {
+		this.problemList.append('<li>Invalid email</li>');
+		this.emailForm.val('');
+	    }
+
+	    if (!phoneGood)
+	    {
+		this.problemList.append('<li>Invalid phone</li>');
+		this.phoneForm.val('');
+	    }
+
+	    //Fade in bad modal dialgoue
+	    $(".modal-dialog-bad").fadeIn('slow');
 	}
-});
+    });
 
-$('#email-form').on('input', function(){
-    var input = $(this);
-    var enteredData = input.val();
-    var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    var out=emailRegex.test(input.val());
+//Should only be called on response window.
+AuthenticationForm.prototype.displayModalSuccess = function($modalName, $closeButton)
+{
+   modalName.fadeIn('slow');
 
-    if (out == false && enteredData != '')
-    {
-        $('#email-form').addClass("bg-danger");
-        emailGood = false;
-    }
-    else
-    {
-        $('#email-form').removeClass("bg-danger");
-        emailGood = true;
-    }
-});
+    this.modalName.click(function(){
+	modalName.fadeOut('slow');
+    });
+};
 
-$('#email-form').focusout(function(){
-    if (emailGood)
-    {
-        $('#email-form').removeClass("bg-danger");
-    }
-});
+AuthenitcationForm.prototype.hookInputHandlers = function()
+{
+    this.nameForm.on('input', function(){
+	var input = $(this);
+	var enteredData = input.val();
 
-$('#email-form').focusin(function(){
-    if (!phoneGood && $('#phone-form').val() != '')
-    {
-        $('#phone-form').addClass("bg-danger");
-    }
-    if (!nameGood && $('#name-form').val() != '')
-    {
-        $('#name-form').addClass("bg-danger");
-    }
-});
+	    if (enteredData.length < 5 && enteredData != '')
+	    {
+		this.nameForm.addClass("bg-danger");
+		this.nameGood = false;
+	    }
+	    else
+	    {
+		this.nameForm.removeClass("bg-danger");
+		this.nameGood = true;
+	    }
+    });
 
-$('#phone-form').focusin(function(){
-    if (!emailGood && $('#email-form').val() != '')
-    {
-        $('#email-form').addClass("bg-danger");
-    }
-    if (!nameGood && $('#name-form').val() != '')
-    {
-        $('#name-form').addClass("bg-danger");
-    }
-});
+    this.emailForm.on('input', function(){
+	var input = $(this);
+	var enteredData = input.val();
+	var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+	var out=emailRegex.test(input.val());
 
-$('#name-form').focusin(function(){
-    if (!emailGood && $('#email-form').val() != '')
-    {
-        $('#email-form').addClass("bg-danger");
-    }
-    if (!phoneGood && $('#phone-form').val() != '')
-    {
-        $('#phone-form').addClass("bg-danger");
-    }
-});
+	if (out == false && enteredData != '')
+	{
+	    this.emailForm.addClass("bg-danger");
+	    this.emailGood = false;
+	}
+	else
+	{
+	    this.emailForm.removeClass("bg-danger");
+	    this.emailGood = true;
+	}
+    });
+
+    this.phoneForm.on('input', function(){
+	var input = $(this);
+	var enteredData = input.val();
+	var phoneRegex = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
+
+	var out=phoneRegex.test(input.val());
+
+	if (out == false && enteredData != '')
+	{
+	    this.phoneForm.addClass("bg-danger");
+	    this.phoneGood = false;
+	}
+	else
+	{
+	    this.phoneForm.removeClass("bg-danger");
+	    this.phoneGood = true;
+	}
+    });
+};
+
+AuthenitcationForm.prototype.hookInputHandlers = function(){
+    this.emailForm.focusout(function(){
+	if (this.emailGood)
+	{
+	    this.emailForm.removeClass("bg-danger");
+	}
+    });
+
+    this.emailForm.focusin(function(){
+	if (!this.phoneGood && $('#phone-form').val() != '')
+	{
+	    this.phoneForm.addClass("bg-danger");
+	}
+	if (!this.nameGood && $('#name-form').val() != '')
+	{
+	    this.emailForm.addClass("bg-danger");
+	}
+    });
+
+    this.phoneForm.focusin(function(){
+	if (!this.emailGood && $('#email-form').val() != '')
+	{
+	    this.emailForm.addClass("bg-danger");
+	}
+	if (!this.nameGood && $('#name-form').val() != '')
+	{
+	    this.nameForm.addClass("bg-danger");
+	}
+    });
+
+    this.nameForm.focusin(function(){
+	if (!this.emailGood && $('#email-form').val() != '')
+	{
+	    this.emailForm.addClass("bg-danger");
+	}
+	if (!this.phoneGood && $('#phone-form').val() != '')
+	{
+	    this.phoneForm..addClass("bg-danger");
+	}
+    });
 
 
-$('#phone-form').focusout(function(){
-    if (phoneGood)
-    {
-        $('#phone-form').removeClass("bg-danger");
-    }
-});
+    this.phoneForm.focusout(function(){
+	if (this.phoneGood)
+	{
+	    this.phoneForm.removeClass("bg-danger");
+	}
+    });
 
-$('#name-form').focusout(function(){
-    if (nameGood)
-    {
-        $('#name-form').removeClass("bg-danger");
-    }
-});
-
-
-$('#phone-form').on('input', function(){
-    var input = $(this);
-    var enteredData = input.val();
-    var phoneRegex = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
-
-    var out=phoneRegex.test(input.val());
-
-    if (out == false && enteredData != '')
-    {
-        $('#phone-form').addClass("bg-danger");
-        phoneGood = false;
-    }
-    else
-    {
-        $('#phone-form').removeClass("bg-danger");
-        phoneGood = true;
-    }
-});
+    this.nameForm.focusout(function(){
+	if (this.nameGood)
+	{
+	    this.nameForm.removeClass("bg-danger");
+	}
+    });
+};
