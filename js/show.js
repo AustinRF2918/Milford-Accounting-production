@@ -1,4 +1,4 @@
-var AuthenticationForm = function(phoneForm, emailForm, nameForm, modalName, problemList){
+var AuthenticationForm = function(phoneForm, emailForm, nameForm, modalNameGood, modalNameBad, problemList){
     this.nameGood = false;
     this.emailGood = false;
     this.phoneGood = false;
@@ -7,23 +7,24 @@ var AuthenticationForm = function(phoneForm, emailForm, nameForm, modalName, pro
     this.emailForm = emailForm;
     this.nameForm = nameForm;
 
-    this.modalName = modalName;
+    this.modalNameGood = modalNameGood;
+    this.modalNameBad = modalNameBad;
     this.problemList = problemList;
 };
 
 //Here we will call this on the sentMessage ID for the form we are using.
-AuthenticationForm.prototype.hookSubmission = function(submissionForm, responseLink, submissionButton, badForm, badFormClose)
+AuthenticationForm.prototype.hookSubmission = function(submissionForm, responseLink, submissionButton, badFormClose)
 {
     var thisObject = this;
 
     badFormClose.click(function(){
-        badForm.fadeOut('slow', function()
+        thisObject.modalNameBad.fadeOut('slow', function()
         {
-            thisObject.problemList.empty();
         });
     })
 
     submissionButton.click(function(){
+            thisObject.problemList.empty();
 
 	if (thisObject.nameGood && thisObject.emailGood && thisObject.phoneGood)
 	{
@@ -52,17 +53,18 @@ AuthenticationForm.prototype.hookSubmission = function(submissionForm, responseL
 	    }
 
 	    //Fade in bad modal dialgoue
-	    badForm.fadeIn('slow');
+	    thisObject.modalNameBad.fadeIn('slow');
 	}
     });
 
 //Should only be called on response window.
-AuthenticationForm.prototype.displayModalSuccess = function($modalName, $closeButton)
+AuthenticationForm.prototype.displayModalSuccess = function($closeButton)
 {
-   modalName.fadeIn('slow');
+   this.modalNameGood.fadeIn('slow');
+   var modal = this.modalNameGood;
 
-    this.modalName.click(function(){
-	modalName.fadeOut('slow');
+   $closeButton.click(function(){
+	modal.fadeOut('slow');
     });
 };
 
