@@ -1603,7 +1603,7 @@ pre {
     background-color: transparent;
     border: 0; }
   .form-control:focus {
-    border-color: #66afe9;
+    border-color: transparent;
     outline: none; }
   .form-control::placeholder {
     color: #999;
@@ -4445,6 +4445,10 @@ a.bg-warning:focus, a.bg-warning:hover {
 .bg-danger {
   color: #fff !important;
   background-color: #d9534f !important; }
+
+.bg-danger-border{
+  border-color: #d9534f !important; }
+}
 
 a.bg-danger:focus, a.bg-danger:hover {
   background-color: #c9302c; }
