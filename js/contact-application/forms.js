@@ -118,12 +118,12 @@ blueBikeApplication.controller("formValidator", function($scope, $http){
 	defocusInput($("#input"), $scope.messageGood, "form-valid");
 	defocusInput($("#phone"), $scope.phoneGood, "form-valid");
 	defocusInput($("#email"), $scope.emailGood, "form-valid");
-	if ($scope.name != "" && $scope.name.length > 5)
+	if ($scope.name != "" && $scope.name.length > 1)
 	{
 	    $scope.nameGood = true;
 	    stylizeInput($("#name"), "form-invalid", "form-valid", $scope.nameGood);
 	}
-	else if ($scope.name.length < 5)
+	else if ($scope.name.length < 1)
 	{
 	    $scope.nameGood = false;
 	    stylizeInput($("#name"), "form-invalid", "form-valid", $scope.nameGood);
